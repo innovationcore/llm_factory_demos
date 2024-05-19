@@ -20,9 +20,12 @@ class LoraXAPIEmbeddings(Embeddings):
                 "input": texts,
             },
         )
+        response = response.json()
         response_list = []
-        for resp in response.json()['data']:
-            response_list.append(resp['embedding'])
+        if 'data' in response:
+            for resp in response['data']:
+                if 'embedding' in resp:
+                    response_list.append(resp['embedding'])
         return response_list
 
     def embed_query(self, text: str) -> List[float]:
