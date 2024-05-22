@@ -18,6 +18,7 @@ llm_api_key = config['llm_api_key']
 llm_api_base = config['llm_api_base']
 llm_api_base_local = config['llm_api_base_local']
 
+
 embeddings = LoraXAPIEmbeddings(
     model="",
     api_key=llm_api_key,
@@ -30,6 +31,11 @@ embeddings = OpenAIEmbeddings(
     openai_api_key=llm_api_key,
     tiktoken_model_name="cl100k"
 )
+'''
+'''
+embeddings = OpenAIEmbeddings(
+    openai_api_key=config['openai_api_key']
+ )
 '''
 
 def process_query(query):
