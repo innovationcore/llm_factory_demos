@@ -12,7 +12,6 @@ class LoraXAPIEmbeddings(Embeddings):
         self.model = model
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        print(len(texts), len(texts[0]))
         response_list = []
         count = 0
         max_size = 10
@@ -45,7 +44,6 @@ class LoraXAPIEmbeddings(Embeddings):
             else:
                 print('WHY IS DATA NOT IN: ', response)
 
-        print(len(response_list))
         return response_list
 
     def embed_query(self, text: str) -> List[float]:
