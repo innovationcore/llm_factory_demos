@@ -41,7 +41,7 @@ embeddings = OpenAIEmbeddings(
 def process_query(query):
 
     raw_documents = TextLoader('state_of_the_union.txt').load()
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_splitter = CharacterTextSplitter(chunk_size=100, chunk_overlap=0)
     documents = text_splitter.split_documents(raw_documents)
     db = FAISS.from_documents(documents, embeddings)
 
