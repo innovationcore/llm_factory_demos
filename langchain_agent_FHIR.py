@@ -41,6 +41,7 @@ embeddings = OpenAIEmbeddings(
 '''
 
 specifications = OpenAPISpec.from_file("fhir_baseR4.yaml")
+print('spect ok')
 
 def paths_and_methods(selected_path):
     #specifications = OpenAPISpec.from_url("https://hapi.fhir.org/baseR4/api-docs")
@@ -60,7 +61,6 @@ if __name__ == '__main__':
 
     OpenAPISpec.base_url = 'https://hapi.fhir.org/baseR4'
     headers = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true", }
-
 
     patient_id = '593176'
 
