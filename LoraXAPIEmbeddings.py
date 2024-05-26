@@ -6,11 +6,11 @@ from typing import List
 from langchain_core.embeddings import Embeddings
 
 class LoraXAPIEmbeddings(Embeddings):
-    def __init__(self, api_key: str, api_url: str, model: str):
+    def __init__(self, api_key: str, api_url: str, model="", max_batch_size=10):
         self.api_key = 'Bearer ' + api_key
         self.api_url = urljoin(os.path.join(api_url, ''),'embeddings')
         self.model = model
-
+        self.max_batch_size = max_batch_size
 
     def query_data(self, session, request_list, response_list):
         #print('rl:', request_list)
@@ -43,21 +43,20 @@ class LoraXAPIEmbeddings(Embeddings):
         response_list = []
 
         session = requests.Session()
-        max_size = 10
         remaining = len(texts)
         request_list = []
         count = 0
         for text in texts:
 
             last_batch = False
-            if max_size > remaining:
-                max_size = remaining
-                if(max_size == remaining):
+            if self.max_batch_size > remaining:
+                self.max_batch_size = remaining
+                if(self.max_batch_size == remaining):
                     #print('last batch')
                     last_batch = True
                 #print('changing max size: ', max_size, 'request_list:', len(request_list))
 
-            if len(request_list) == max_size:
+            if len(request_list) == self.max_batch_size:
 
                 request_list, response_list = self.query_data(session, request_list, response_list)
 
