@@ -40,6 +40,9 @@ class LoraXAPIEmbeddings(Embeddings):
 
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
+
+        max_size = self.max_batch_size
+
         response_list = []
 
         session = requests.Session()
@@ -47,19 +50,18 @@ class LoraXAPIEmbeddings(Embeddings):
         request_list = []
         count = 0
         for text in texts:
-
             last_batch = False
-            if self.max_batch_size > remaining:
-                self.max_batch_size = remaining
-                if(self.max_batch_size == remaining):
+            if max_size > remaining:
+                max_size = remaining
+                if(max_size == remaining):
                     #print('last batch')
                     last_batch = True
-                #print('changing max size: ', max_size, 'request_list:', len(request_list))
+                #print('changing max size: ', self.max_batch_size, 'request_list:', len(request_list))
 
-            if len(request_list) == self.max_batch_size:
 
+            if len(request_list) == max_size:
                 request_list, response_list = self.query_data(session, request_list, response_list)
-
+                
 
             remaining = (len(texts) - len(response_list))
             count += 1
@@ -69,7 +71,7 @@ class LoraXAPIEmbeddings(Embeddings):
             print('text:', len(texts))
             print('remaining:', remaining)
             print('count:', count)
-            print('max_size:', max_size)
+            print('max_size:', self.max_batch_size)
 
             print('---')
             '''
@@ -87,11 +89,17 @@ class LoraXAPIEmbeddings(Embeddings):
         print('e_remaining:', remaining)
         print('e_count:', count)
         '''
-
         session.close()
 
         return response_list
 
     def embed_query(self, text: str) -> List[float]:
-        return self.embed_documents([text])[0]
+        response = self.embed_documents([text])
+        if len(response) > 0:
+            print(response[0])
+            return response[0]
+        else:
+            print('embed_query response is None')
+
+
 
