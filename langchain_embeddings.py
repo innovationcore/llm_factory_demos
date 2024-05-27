@@ -14,9 +14,9 @@ llm_api_base = config['llm_api_base']
 llm_api_base_local = config['llm_api_base_local']
 
 embeddings = LoraXAPIEmbeddings(
-    model="",
     api_key=llm_api_key,
     api_url=llm_api_base,
+    max_batch_size=10
 )
 
 #embeddings = OpenAIEmbeddings(
