@@ -1,6 +1,8 @@
 
 import json
+import os
 
+import requests
 from langchain_community.chains.openapi.chain import OpenAPIEndpointChain
 from langchain_community.tools import APIOperation
 from langchain_community.utilities.openapi import OpenAPISpec
@@ -48,8 +50,55 @@ def paths_and_methods(selected_path):
 
     return operation
 
+def get_studies(study_file):
+
+    if not os.path.isfile(study_file):
+        url = 'https://clinicaltrials.gov/api/v2/studies?query.cond=lung+cancer&query.locn=University+of+Kentucky&filter.overallStatus=RECRUITING%7CENROLLING_BY_INVITATION'
+        s = requests.session()
+        s.headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+
+        report = dict()
+        report['studies'] = []
+
+        next_page = True
+        nextPageToken = None
+        while(next_page):
+            if nextPageToken is not None:
+                response = s.get(url + '&pageToken=' + nextPageToken).json()
+            else:
+                response = s.get(url).json()
+
+            for study in response['studies']:
+                report['studies'].append(study)
+
+            if 'nextPageToken' in response:
+                next_page = True
+                nextPageToken = response['nextPageToken']
+
+            else:
+                next_page = False
+
+        #curl -X GET "https://clinicaltrials.gov/api/v2/studies?query.cond=lung+cancer&query.locn=University+of+Kentucky&filter.overallStatus=RECRUITING%7CENROLLING_BY_INVITATION&pageToken=NF0g5JeEmvMqww" -H "accept: application/json" \
+        s.close()
+
+        print('studies:', len(report['studies']))
+        with open('uk_studies.json', 'w') as fp:
+            json.dump(report, fp)
+
+    with open(study_file) as f:
+        d = json.load(f)
+
+    return d
+
 if __name__ == '__main__':
 
+    study_file = 'uk_studies.json'
+    studies = get_studies(study_file)
+
+    exit(0)
 
     OpenAPISpec.base_url = 'https://www.clinicaltrials.gov/api/v2/'
     headers = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true", }
