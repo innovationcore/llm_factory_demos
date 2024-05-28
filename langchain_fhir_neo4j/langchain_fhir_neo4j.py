@@ -327,21 +327,24 @@ if __name__ == '__main__':
 
     k_nearest = 200
 
-    # question = "What can you tell me about Alfonso's claim created on 03/06/1977?"
-    # question = "What can you tell me about the medical claim created on 03/06/1977?"
-    # question = "Based on this explanation of benefits, how much did it cost and what service was provided?"
-    # question = "Based on this explanation of benefits created on July 15, 2016, how much did it cost and what service was provided?"
-    # question = "Based on this explanation of benefits created on March 6, 1978, how much did it cost and what service was provided?"
-    # question = "Based on this explanation of benefits created on January 11, 2009, how much did it cost and what service was provided?"
-    # question = "What was the blood pressure on 2/9/2014?"
-    # question = "What was the blood pressure?"
-    # question = "Based on this explanation of benefits created on January 18, 2014, how much did it cost and what service was provided?"
-    # question = "How much did the colon scan eighteen days after the first of the year 2019 cost?"
+    #question = "What can you tell me about Alfonso's claim created on 03/06/1977?"
+    #question = "What can you tell me about the medical claim created on 03/06/1977?"
+    #question = "Based on this explanation of benefits, how much did it cost and what service was provided?"
+    #question = "Based on this explanation of benefits created on July 15, 2016, how much did it cost and what service was provided?"
+    #question = "Based on this explanation of benefits created on March 6, 1978, how much did it cost and what service was provided?"
+    #question = "Based on this explanation of benefits created on January 11, 2009, how much did it cost and what service was provided?"
+    #question = "What was the blood pressure on 2/9/2014?"
+    #question = "What was the blood pressure?"
+    #question = "Based on this explanation of benefits created on January 18, 2014, how much did it cost and what service was provided?"
+    #question = "How much did the colon scan eighteen days after the first of the year 2019 cost?"
     #question = "How much did the colon scan on Jan. 18, 2014 cost?"
     #question = "Did Alfonzo975 get a chest x-ray?"
     #question = "What is heart rate of patient Alfonzo975 on 03/27/2015."
     #question = "Tell me about heart "
-    question = "What is the average heart rate?"
+    #question = "Who many patients are males over the age of 50?"
+    question = "Persons matching the following description: Inclusion Criteria:\n\n* admitted to Burke Rehabilitation Hospital for inpatient rehabilitation within 5 days after same-day or staged bilateral total knee arthroplasty;\n* 50-85 years of age;\n* able to read and understand English or a hospital-provided translator when consenting for the study;\n* free from contraindications for kinesiotaping (see below); and,\n* able to tolerate an active rehabilitation program.\n\n" \
+               "Exclusion Criteria:\n\n* stage III or IV heart failure, stage III or IV renal failure;\n* fragile, very hairy or sensitive skin;\n* anesthesia or paraesthesia of any area of the lower extremity, except the surgical sites\n* active skin rashes or infections or skin lesions in the lower extremity;\n* prior history of allergic reactions to skin taping, bandaids, surgical tape; athletic tape or other skin-adhering electrode adhesives;\n* prior history of lower extremity lymphedema;3\n* prior history of lower extremity venous or arterial disease;\n* post-operative complications in the surgical sites;4\n* partial joint arthroplasty or revision arthroplasty of one or both knees;1,5\n* inability to give informed consent offered in English or through a hospital-provided translator\n* age less than 50 years or over 85 years;\n* inability to tolerate an active rehabilitation program."
+
     '''
     response = vector_index.similarity_search(question,k=1)  # k_nearest is not used here because we don't have a retrieval query yet.
     print(response)

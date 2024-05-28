@@ -61,7 +61,7 @@ class LoraXAPIEmbeddings(Embeddings):
 
             if len(request_list) == max_size:
                 request_list, response_list = self.query_data(session, request_list, response_list)
-                
+
 
             remaining = (len(texts) - len(response_list))
             count += 1
@@ -96,7 +96,6 @@ class LoraXAPIEmbeddings(Embeddings):
     def embed_query(self, text: str) -> List[float]:
         response = self.embed_documents([text])
         if len(response) > 0:
-            print(response[0])
             return response[0]
         else:
             print('embed_query response is None')
