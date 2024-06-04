@@ -2,3 +2,4 @@ langchain
 requests
 openapi-pydantic
 neo4j
+gradio
