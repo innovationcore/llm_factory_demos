@@ -29,4 +29,4 @@ def predict(message, history):
     gpt_response = llm(history_langchain_format)
     return gpt_response.content
 
-gr.ChatInterface(predict).launch()
+gr.ChatInterface(predict).launch(share=False, debug=False, server_name="0.0.0.0", ssl_verify=False)
