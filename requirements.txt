@@ -1,4 +1,6 @@
 langchain
+langchain_community
+langchain_openai
 requests
 openapi-pydantic
 neo4j
