@@ -8,13 +8,14 @@ from langchain_community.vectorstores import Neo4jVector
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
-from LoraXAPIEmbeddings import LoraXAPIEmbeddings
-
 import json
+
+from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 from NEO4J_Graph import Graph
 from FHIR_to_graph import resource_to_node, resource_to_edges
 
 from openai import OpenAI
+
 
 with open('../config.json') as user_file:
     config = json.load(user_file)
@@ -36,11 +37,6 @@ client = OpenAI(
         base_url=llm_api_base,
     )
 
-'''
-llm = ChatOpenAI(
-    openai_api_key=config['openai_api_key']
-)
-'''
 
 embeddings = LoraXAPIEmbeddings(
     model="",

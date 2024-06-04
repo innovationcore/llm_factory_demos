@@ -2,8 +2,6 @@
 
 import json
 
-from langchain_openai import OpenAIEmbeddings
-
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 
 with open('config.json') as user_file:
@@ -18,17 +16,6 @@ embeddings = LoraXAPIEmbeddings(
     api_url=llm_api_base,
     max_batch_size=10
 )
-
-#embeddings = OpenAIEmbeddings(
-#    openai_api_key=config['openai_api_key']
-#)
-
-'''
-embeddings = OpenAIEmbeddings(
-    openai_api_base=llm_api_base,
-    openai_api_key=llm_api_key
-)
-'''
 
 def process_query(query):
 

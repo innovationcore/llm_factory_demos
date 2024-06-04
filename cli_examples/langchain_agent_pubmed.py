@@ -2,11 +2,7 @@
 
 import json
 
-from langchain_openai import OpenAIEmbeddings
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
-from langchain_community.document_loaders import WebBaseLoader
-from langchain_community.vectorstores import FAISS
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.tools.retriever import create_retriever_tool
 from langchain_openai import ChatOpenAI
 from langchain import hub
@@ -15,9 +11,7 @@ from langchain.agents import AgentExecutor
 from langchain_community.retrievers import PubMedRetriever
 
 
-
-
-with open('config.json') as user_file:
+with open('../config.json') as user_file:
     config = json.load(user_file)
 
 llm_api_key = config['llm_api_key']
@@ -38,13 +32,6 @@ embeddings = LoraXAPIEmbeddings(
     api_url=llm_api_base,
 )
 
-'''
-embeddings = OpenAIEmbeddings(
-    openai_api_base=llm_api_base,
-    openai_api_key=llm_api_key,
-    tiktoken_model_name="cl100k"
-)
-'''
 
 def get_tools():
 

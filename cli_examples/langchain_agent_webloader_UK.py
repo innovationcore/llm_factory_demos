@@ -2,7 +2,6 @@
 
 import json
 
-from langchain_openai import OpenAIEmbeddings
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores import FAISS
@@ -14,7 +13,7 @@ from langchain.agents import create_tool_calling_agent
 from langchain.agents import AgentExecutor
 
 
-with open('config.json') as user_file:
+with open('../config.json') as user_file:
     config = json.load(user_file)
 
 llm_api_key = config['llm_api_key']
@@ -35,13 +34,6 @@ embeddings = LoraXAPIEmbeddings(
     api_url=llm_api_base,
 )
 
-'''
-embeddings = OpenAIEmbeddings(
-    openai_api_base=llm_api_base,
-    openai_api_key=llm_api_key,
-    tiktoken_model_name="cl100k"
-)
-'''
 
 def get_tools(url):
 

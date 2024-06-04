@@ -2,8 +2,6 @@
 
 import json
 
-from langchain_openai import OpenAIEmbeddings
-
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
@@ -11,7 +9,7 @@ from langchain_community.vectorstores import FAISS
 
 
 
-with open('config.json') as user_file:
+with open('../config.json') as user_file:
     config = json.load(user_file)
 
 llm_api_key = config['llm_api_key']
@@ -24,19 +22,6 @@ embeddings = LoraXAPIEmbeddings(
     api_key=llm_api_key,
     api_url=llm_api_base,
 )
-
-'''
-embeddings = OpenAIEmbeddings(
-    openai_api_base=llm_api_base,
-    openai_api_key=llm_api_key,
-    tiktoken_model_name="cl100k"
-)
-'''
-'''
-embeddings = OpenAIEmbeddings(
-    openai_api_key=config['openai_api_key']
- )
-'''
 
 def process_query(query):
 

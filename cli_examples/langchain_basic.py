@@ -3,7 +3,7 @@ import json
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
-with open('config.json') as user_file:
+with open('../config.json') as user_file:
     config = json.load(user_file)
 
 llm_api_key = config['llm_api_key']
