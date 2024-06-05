@@ -44,12 +44,6 @@ embeddings = LoraXAPIEmbeddings(
     api_url=llm_api_base,
 )
 
-'''
-embeddings = OpenAIEmbeddings(
-    openai_api_key=config['openai_api_key']
-)
-'''
-
 def get_database():
 
     # database
@@ -337,9 +331,9 @@ if __name__ == '__main__':
     #question = "Did Alfonzo975 get a chest x-ray?"
     #question = "What is heart rate of patient Alfonzo975 on 03/27/2015."
     #question = "Tell me about heart "
-    #question = "Who many patients are males over the age of 50?"
-    question = "Persons matching the following description: Inclusion Criteria:\n\n* admitted to Burke Rehabilitation Hospital for inpatient rehabilitation within 5 days after same-day or staged bilateral total knee arthroplasty;\n* 50-85 years of age;\n* able to read and understand English or a hospital-provided translator when consenting for the study;\n* free from contraindications for kinesiotaping (see below); and,\n* able to tolerate an active rehabilitation program.\n\n" \
-               "Exclusion Criteria:\n\n* stage III or IV heart failure, stage III or IV renal failure;\n* fragile, very hairy or sensitive skin;\n* anesthesia or paraesthesia of any area of the lower extremity, except the surgical sites\n* active skin rashes or infections or skin lesions in the lower extremity;\n* prior history of allergic reactions to skin taping, bandaids, surgical tape; athletic tape or other skin-adhering electrode adhesives;\n* prior history of lower extremity lymphedema;3\n* prior history of lower extremity venous or arterial disease;\n* post-operative complications in the surgical sites;4\n* partial joint arthroplasty or revision arthroplasty of one or both knees;1,5\n* inability to give informed consent offered in English or through a hospital-provided translator\n* age less than 50 years or over 85 years;\n* inability to tolerate an active rehabilitation program."
+    question = "The date is 6/5/2024.  Based on date of birth count the number of male patients that are over the age of 50?"
+    #question = "Persons matching the following description: Inclusion Criteria:\n\n* admitted to Burke Rehabilitation Hospital for inpatient rehabilitation within 5 days after same-day or staged bilateral total knee arthroplasty;\n* 50-85 years of age;\n* able to read and understand English or a hospital-provided translator when consenting for the study;\n* free from contraindications for kinesiotaping (see below); and,\n* able to tolerate an active rehabilitation program.\n\n" \
+    #           "Exclusion Criteria:\n\n* stage III or IV heart failure, stage III or IV renal failure;\n* fragile, very hairy or sensitive skin;\n* anesthesia or paraesthesia of any area of the lower extremity, except the surgical sites\n* active skin rashes or infections or skin lesions in the lower extremity;\n* prior history of allergic reactions to skin taping, bandaids, surgical tape; athletic tape or other skin-adhering electrode adhesives;\n* prior history of lower extremity lymphedema;3\n* prior history of lower extremity venous or arterial disease;\n* post-operative complications in the surgical sites;4\n* partial joint arthroplasty or revision arthroplasty of one or both knees;1,5\n* inability to give informed consent offered in English or through a hospital-provided translator\n* age less than 50 years or over 85 years;\n* inability to tolerate an active rehabilitation program."
 
     '''
     response = vector_index.similarity_search(question,k=1)  # k_nearest is not used here because we don't have a retrieval query yet.

@@ -69,18 +69,18 @@ if __name__ == '__main__':
     q1 = "hi!"
     r1 = agent_executor.invoke({"input": q1})
     print('q1:', q1, 'r1:', r1)
+    '''
 
     q2 = "how can langsmith help with testing?"
     r2 = agent_executor.invoke({"input": q2})
     print('q2:', q2, 'r2:', r2)
 
+    '''
     q3 = "whats the weather in lexington, kentucky?"
     r3 = agent_executor.invoke({"input": q3})
     print('q3:', q3, 'r3:', r3)
     '''
 
-    q4 = "what are the latest Dow numbers"
-    r4 = agent_executor.invoke({"input": q4})
-    print('q4:', q4, 'r4:', r4)
+
 
 

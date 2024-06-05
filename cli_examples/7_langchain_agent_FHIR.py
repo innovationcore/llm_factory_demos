@@ -9,8 +9,6 @@ from langchain_openai import ChatOpenAI
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 
 
-
-
 with open('../config.json') as user_file:
     config = json.load(user_file)
 
@@ -60,32 +58,10 @@ if __name__ == '__main__':
     operation = paths_and_methods(selected_path=selected_path, selected_method=selected_method)
     chain = OpenAPIEndpointChain.from_api_operation(operation, llm, headers=headers, verbose=True)
 
-    #query = 'Does patient with id ' + patient_id + ' live on the east coast?'
-    #result = chain(query)
-    #print(result)
-
-    '''
-    query = 'Which city is patient with id ' + patient_id + ' from?'
+    query = 'The date is 6/5/2024, what routine health screenings would patient id ' + patient_id + ' be qualified for based on age?'
     result = chain(query)
     print(result)
 
-    query = 'Is patient with id ' + patient_id + ' from an impoverished'
-    result = chain(query)
-    print(result)
-
-    query = 'How old is patient with id ' + patient_id + '?'
-    result = chain(query)
-    print(result)
-
-    query = 'Is the patient with id ' + patient_id + ' old enough to drink?'
-    result = chain(query)
-    print(result)
-    '''
-    inclusion = 'Inclusion Criteria:\n\n* admitted to Burke Rehabilitation Hospital for inpatient rehabilitation within 5 days after same-day or staged bilateral total knee arthroplasty;\n* 50-85 years of age;\n* able to read and understand English or a hospital-provided translator when consenting for the study;\n* free from contraindications for kinesiotaping (see below); and,\n* able to tolerate an active rehabilitation program.'
-    #query = 'The date is 5/18/2024, what routine health screenings would patient id ' + patient_id + ' be qualified for based on age?'
-    query = 'What conditions does ' + patient_id + ' have ?'
-    result = chain(query)
-    print(result)
 
 
 

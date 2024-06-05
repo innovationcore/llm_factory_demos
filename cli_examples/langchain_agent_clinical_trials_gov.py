@@ -3,6 +3,7 @@ import json
 import os
 
 import requests
+from langchain_community.chains.openapi.chain import OpenAPIEndpointChain
 from langchain_community.tools import APIOperation
 from langchain_community.utilities.openapi import OpenAPISpec
 from langchain_openai import ChatOpenAI
@@ -94,10 +95,10 @@ def get_studies(study_file):
 
 if __name__ == '__main__':
 
-    study_file = 'uk_studies.json'
-    studies = get_studies(study_file)
+    #study_file = 'uk_studies.json'
+    #studies = get_studies(study_file)
 
-    exit(0)
+    #exit(0)
 
     OpenAPISpec.base_url = 'https://www.clinicaltrials.gov/api/v2/'
     headers = {"Access-Control-Allow-Origin": "*", "Access-Control-Allow-Credentials": "true", }
@@ -106,7 +107,7 @@ if __name__ == '__main__':
 
     selected_path = '/studies'
     operation = paths_and_methods(selected_path=selected_path)
-    chain = OpenAPIEndpointChain.from_api_operation(operation, llm, headers=headers, verbose=False)
+    chain = OpenAPIEndpointChain.from_api_operation(operation, llm, headers=headers, verbose=True)
 
     #query = 'Does patient with id ' + patient_id + ' live on the east coast?'
     #result = chain(query)
@@ -131,7 +132,7 @@ if __name__ == '__main__':
     '''
 
     #query = 'The date is 5/18/2024, what routine health screenings would patient id ' + patient_id + ' be qualified for based on age?'
-    query = 'Tell me about studies on aids'
+    query = 'Are there any studies on lung cancer?'
     result = chain(query)
     print(result)
 
