@@ -21,6 +21,7 @@ llm = ChatOpenAI(
 )
 
 def predict(message, history):
+    print('Incoming message:', message)
     history_langchain_format = []
     for human, ai in history:
         history_langchain_format.append(HumanMessage(content=human))
