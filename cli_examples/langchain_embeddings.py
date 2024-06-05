@@ -4,7 +4,7 @@ import json
 
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 
-with open('config.json') as user_file:
+with open('../config.json') as user_file:
     config = json.load(user_file)
 
 llm_api_key = config['llm_api_key']

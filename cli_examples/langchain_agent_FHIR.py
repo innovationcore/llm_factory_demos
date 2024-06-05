@@ -32,14 +32,6 @@ embeddings = LoraXAPIEmbeddings(
     api_url=llm_api_base,
 )
 
-'''
-embeddings = OpenAIEmbeddings(
-    openai_api_base=llm_api_base,
-    openai_api_key=llm_api_key,
-    tiktoken_model_name="cl100k"
-)
-'''
-
 specifications = OpenAPISpec.from_file("fhir_baseR4.yaml")
 print('spect ok')
 

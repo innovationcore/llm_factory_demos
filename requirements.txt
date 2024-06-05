@@ -1,7 +1,11 @@
 langchain
 langchain_community
 langchain_openai
+langchainhub
 requests
 openapi-pydantic
 neo4j
 gradio
+xmltodict
+BeautifulSoup4
+faiss-cpu
