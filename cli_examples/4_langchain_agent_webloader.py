@@ -40,22 +40,22 @@ def get_tools(url):
     loader = WebBaseLoader(url)
     docs = loader.load()
     documents = RecursiveCharacterTextSplitter(
-        chunk_size=1000, chunk_overlap=200
+        chunk_size=200, chunk_overlap=100
     ).split_documents(docs)
     vector = FAISS.from_documents(documents, embeddings)
     retriever = vector.as_retriever()
 
     retriever_tool = create_retriever_tool(
         retriever,
-        "langsmith_search",
-        "Search for information about LangSmith. For any questions about LangSmith, you must use this tool!",
+        "admissions_search",
+        "Search for information about university of kentucky admissions.",
     )
 
     return [retriever_tool]
 
 if __name__ == '__main__':
 
-    url = "https://docs.smith.langchain.com/overview"
+    url = "https://admission.uky.edu/freshman/admission-checklist"
     tools = get_tools(url)
 
     # Get the prompt to use - you can modify this!
@@ -69,17 +69,21 @@ if __name__ == '__main__':
     q1 = "hi!"
     r1 = agent_executor.invoke({"input": q1})
     print('q1:', q1, 'r1:', r1)
-    '''
 
     q2 = "how can langsmith help with testing?"
     r2 = agent_executor.invoke({"input": q2})
     print('q2:', q2, 'r2:', r2)
 
-    '''
     q3 = "whats the weather in lexington, kentucky?"
     r3 = agent_executor.invoke({"input": q3})
     print('q3:', q3, 'r3:', r3)
     '''
+
+    q4 = "What are the university of kentucky admission requirements for an in-state freshman?"
+    r4 = agent_executor.invoke({"input": q4})
+    print('q4:', q4, 'r4:', r4)
+
+
 
 
 

@@ -7,8 +7,6 @@ from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 
-
-
 with open('../config.json') as user_file:
     config = json.load(user_file)
 
@@ -26,7 +24,7 @@ embeddings = LoraXAPIEmbeddings(
 def process_query(query):
 
     raw_documents = TextLoader('state_of_the_union.txt').load()
-    text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+    text_splitter = CharacterTextSplitter(chunk_size=200, chunk_overlap=10)
     documents = text_splitter.split_documents(raw_documents)
     db = FAISS.from_documents(documents, embeddings)
 

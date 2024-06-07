@@ -36,59 +36,25 @@ class LoraXAPIEmbeddings(Embeddings):
             print('WHY IS DATA NOT IN: ', response)
 
         request_list.clear()
-        return request_list, response_list
-
+        return response_list
 
     def embed_documents(self, texts: List[str]) -> List[List[float]]:
 
         max_size = self.max_batch_size
-
+        offset = 0
         response_list = []
 
         session = requests.Session()
-        remaining = len(texts)
-        request_list = []
-        count = 0
-        for text in texts:
-            last_batch = False
+
+        while len(texts) != len(response_list):
+            remaining = len(texts) - len(response_list)
             if max_size > remaining:
                 max_size = remaining
-                if(max_size == remaining):
-                    #print('last batch')
-                    last_batch = True
-                #print('changing max size: ', self.max_batch_size, 'request_list:', len(request_list))
 
+            request_list = texts[offset:offset + max_size]
+            offset += max_size
+            response_list = self.query_data(session, request_list, response_list)
 
-            if len(request_list) == max_size:
-                request_list, response_list = self.query_data(session, request_list, response_list)
-
-
-            remaining = (len(texts) - len(response_list))
-            count += 1
-            '''
-            print('request_list:', len(request_list))
-            print('response_list:', len(response_list))
-            print('text:', len(texts))
-            print('remaining:', remaining)
-            print('count:', count)
-            print('max_size:', self.max_batch_size)
-
-            print('---')
-            '''
-
-            if remaining != 0:
-                request_list.append(text)
-
-            if last_batch:
-                request_list, response_list = self.query_data(session, request_list, response_list)
-
-        '''
-        print('e_request_list:', len(request_list))
-        print('e_response_list:', len(response_list))
-        print('e_text:', len(texts))
-        print('e_remaining:', remaining)
-        print('e_count:', count)
-        '''
         session.close()
 
         return response_list

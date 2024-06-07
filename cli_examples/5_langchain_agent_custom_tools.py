@@ -1,6 +1,10 @@
 #See https://python.langchain.com/v0.1/docs/modules/agents/quick_start/
 
 import json
+from typing import List
+
+from langchain_core.retrievers import BaseRetriever
+from langchain_core.documents import Document
 
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 from langchain_community.document_loaders import WebBaseLoader
@@ -35,7 +39,8 @@ embeddings = LoraXAPIEmbeddings(
 )
 
 
-def get_tools(url):
+
+def get_retrever(url, name, desc):
 
     loader = WebBaseLoader(url)
     docs = loader.load()
@@ -51,12 +56,12 @@ def get_tools(url):
         "Search for information about university of kentucky admissions.",
     )
 
-    return [retriever_tool]
+    return retriever_tool
 
 if __name__ == '__main__':
 
-    url = "https://admission.uky.edu/freshman/admission-checklist"
-    tools = get_tools(url)
+    uk_tool = get_retrever("https://www.uky.edu", "UK web", "UK data")
+    tools = [uk_tool]
 
     # Get the prompt to use - you can modify this!
     prompt = hub.pull("hwchase17/openai-functions-agent")
@@ -64,6 +69,11 @@ if __name__ == '__main__':
 
     agent = create_tool_calling_agent(llm, tools, prompt)
     agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, stream_runnable=False)
+
+    q1 = "Tell me about UK"
+    r1 = agent_executor.invoke({"input": q1})
+    print('q1:', q1, 'r1:', r1)
+
 
     '''
     q1 = "hi!"
@@ -77,10 +87,10 @@ if __name__ == '__main__':
     q3 = "whats the weather in lexington, kentucky?"
     r3 = agent_executor.invoke({"input": q3})
     print('q3:', q3, 'r3:', r3)
-    '''
-
+    
     q4 = "What are the university of kentucky admission requirements for an in-state freshman?"
     r4 = agent_executor.invoke({"input": q4})
     print('q4:', q4, 'r4:', r4)
+    '''
 
 
