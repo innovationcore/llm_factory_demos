@@ -7,9 +7,9 @@ from langchain_core.retrievers import BaseRetriever
 from langchain_core.documents import Document
 
 from LoraXAPIEmbeddings import LoraXAPIEmbeddings
-from langchain_community.document_loaders import WebBaseLoader
+from langchain_community.document_loaders import WebBaseLoader, TextLoader
 from langchain_community.vectorstores import FAISS
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain_text_splitters import RecursiveCharacterTextSplitter, CharacterTextSplitter
 from langchain.tools.retriever import create_retriever_tool
 from langchain_openai import ChatOpenAI
 from langchain import hub
@@ -40,27 +40,26 @@ embeddings = LoraXAPIEmbeddings(
 
 
 
-def get_retrever(url, name, desc):
+def get_retrever(document, name, desc):
 
-    loader = WebBaseLoader(url)
-    docs = loader.load()
-    documents = RecursiveCharacterTextSplitter(
-        chunk_size=200, chunk_overlap=100
-    ).split_documents(docs)
+    raw_documents = TextLoader(document).load()
+    text_splitter = CharacterTextSplitter(chunk_size=200, chunk_overlap=10)
+    documents = text_splitter.split_documents(raw_documents)
+
     vector = FAISS.from_documents(documents, embeddings)
     retriever = vector.as_retriever()
 
     retriever_tool = create_retriever_tool(
         retriever,
-        "admissions_search",
-        "Search for information about university of kentucky admissions.",
+        name,
+        desc,
     )
 
     return retriever_tool
 
 if __name__ == '__main__':
 
-    uk_tool = get_retrever("https://www.uky.edu", "UK web", "UK data")
+    uk_tool = get_retrever('state_of_the_union.txt', "state_of_union", "State of the union address")
     tools = [uk_tool]
 
     # Get the prompt to use - you can modify this!
@@ -68,9 +67,9 @@ if __name__ == '__main__':
     print(prompt.messages)
 
     agent = create_tool_calling_agent(llm, tools, prompt)
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, stream_runnable=False)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, stream_runnable=False, return_direct=True)
 
-    q1 = "Tell me about UK"
+    q1 = "What did the president say about Ketanji Brown Jackson"
     r1 = agent_executor.invoke({"input": q1})
     print('q1:', q1, 'r1:', r1)
 
