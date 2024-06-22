@@ -34,7 +34,7 @@ class LoraXAPIEmbeddings(Embeddings):
                     print('why is embedding not in:', resp)
         else:
             print('WHY IS DATA NOT IN: ', response)
-
+            print('request_list:', request_list)
         request_list.clear()
         return response_list
 
