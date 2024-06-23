@@ -245,8 +245,8 @@ if __name__ == '__main__':
     graph = get_database()
     #populate the database
     print('Loading database')
-    #load_database(graph)
-    #exit(0)
+    load_database(graph)
+    exit(0)
     #print('Creating vectors')
     create_vectors()
 

@@ -138,6 +138,9 @@ def resource_to_edges(resource):
 def resource_to_node(resource):
     resource_type = resource['resourceType']
     flat_resource = flat_fhir_to_json_str(flatten_fhir(resource), resource_name(resource), FHIR_to_string(resource))
+    print(flat_resource)
+    print(type(flat_resource))
+    exit()
     return f'CREATE (:{resource_type}:resource {flat_resource})'
 
 
