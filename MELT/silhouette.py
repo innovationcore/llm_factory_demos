@@ -24,18 +24,32 @@ X, y = make_blobs(
 )  # For reproducibility
 '''
 
+'''
+For n_clusters = 2 The average silhouette_score is : 0.05003052374389088
+For n_clusters = 4 The average silhouette_score is : 0.028978929774148097
+For n_clusters = 8 The average silhouette_score is : 0.03023051279467867
+For n_clusters = 16 The average silhouette_score is : 0.03129156479319785
+For n_clusters = 32 The average silhouette_score is : 0.028232902060620693
+For n_clusters = 64 The average silhouette_score is : 0.027558840885989852
+For n_clusters = 128 The average silhouette_score is : 0.02947966536207603
+For n_clusters = 256 The average silhouette_score is : 0.028529839222093963
+
+'''
+
 emb_list = []
 
 combined_str_path = 'combined_dataset.json'
 
+print('opening dataset')
 with open(combined_str_path) as f:
     combined_str_data = json.load(f)
 
+print('parsing records')
 for record in combined_str_data:
     emb_list.append(record['embedding'])
 
+print('found', len(emb_list), 'embeddings')
 X = numpy.array(emb_list)
-
 
 range_n_clusters = [2, 4, 8, 16, 32, 64, 128, 256]
 
