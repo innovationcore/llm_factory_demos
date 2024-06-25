@@ -7,7 +7,7 @@ import requests
 from typing import List
 from langchain_core.embeddings import Embeddings
 
-class LoraXAPIEmbeddings(Embeddings):
+class caai_emb_client(Embeddings):
     def __init__(self, api_key: str, api_url: str, model="", max_batch_size=10, num_workers=1, progress_bar=False):
         self.api_key = 'Bearer ' + api_key
         self.api_url = urljoin(os.path.join(api_url, ''),'embeddings')
@@ -19,8 +19,6 @@ class LoraXAPIEmbeddings(Embeddings):
     def query_data(self, request_list, session, something) -> list:
 
         response_list = []
-
-        #session = requests.Session()
 
         response = session.post(
             self.api_url,
@@ -43,8 +41,6 @@ class LoraXAPIEmbeddings(Embeddings):
         else:
             print('WHY IS DATA NOT IN: ', response)
             print('request_list:', request_list)
-
-        #session.close()
 
         return response_list
     def query_data_old(self, session, request_list, response_list):
@@ -95,6 +91,11 @@ class LoraXAPIEmbeddings(Embeddings):
 
             request_list = texts[offset:offset + max_size]
             offset += max_size
+
+            print('request_list_size:', len(request_list))
+            print('request_list:', request_list)
+            if len(request_list) > 0:
+                exit()
 
             if self.progress_bar:
                 job = workers_pool.apply_async(self.query_data, args=(list(request_list), session, None),
@@ -152,6 +153,3 @@ class LoraXAPIEmbeddings(Embeddings):
             return response[0]
         else:
             print('embed_query response is None')
-
-
-
