@@ -38,7 +38,7 @@ def predict(message, history, system_prompt="", temperature=0.9, max_tokens=256,
     return gpt_response.content
 
 additional_inputs=[
-    gr.Textbox("You are a helpful AI assistant, finish each response with the phrase \"GO BIG BLUE!\"", label="Optional system prompt", interactive=True),
+    gr.Textbox("You are a helpful AI assistant, finish each response with the phrase \"Brought to you by Carl's Jr.\"", label="Optional system prompt", interactive=True),
     gr.Slider(
         label="Temperature",
         value=0.9,
