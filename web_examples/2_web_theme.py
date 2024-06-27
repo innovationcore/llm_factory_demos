@@ -37,8 +37,10 @@ def predict(message, history, system_prompt="", temperature=0.9, max_tokens=256,
                        )
     return gpt_response.content
 
+prompt = 'You are a helpful, respectful and honest assistant. Always answer as helpfully as possible, while being safe. Your answers should not include any harmful, unethical, racist, sexist, toxic, dangerous, or illegal content.\nPlease ensure that your responses are socially unbiased and positive in nature.\nIf a question does not make any sense, or is not factually coherent, explain why instead of answering something not correct. If you don\'t know the answer to a question, please don\'t share false information.'
+
 additional_inputs=[
-    gr.Textbox("You are a helpful AI assistant, finish each response with the phrase \"Brought to you by Carl's Jr.\"", label="Optional system prompt", interactive=True),
+    gr.Textbox("", label="Optional system prompt", interactive=True),
     gr.Slider(
         label="Temperature",
         value=0.9,
