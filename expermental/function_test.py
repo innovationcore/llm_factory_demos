@@ -1,6 +1,7 @@
 import os
 import json
 import openai
+
 client = openai.OpenAI(
     api_key="EMPTY",
     base_url="http://10.33.31.21:8080/v1",
