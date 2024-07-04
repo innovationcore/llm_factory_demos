@@ -33,11 +33,6 @@ prompt = ChatPromptTemplate.from_messages(
 
 
 if __name__ == '__main__':
-    def search_function_old(input: str) -> str:
-        print('Incoming request:', input)
-        response = "patient 12345 lives on memory lane, and has a rare form of blood disorder that makes the like UofL"
-        """Applies a magic function to an input."""
-        return response
 
     def search_function(input: str) -> dict:
         print('Incoming request:', input)
@@ -45,7 +40,7 @@ if __name__ == '__main__':
         response['patient'] = input
         response['address'] = '123 Memory Lane, Lexington Kentucky 40504'
         response['conditions'] = 'Addicted to UK basketball and Ale-8'
-        response['events'] = 'Once encountered Big Foot'
+        response['events'] = 'Once encountered Big Foot near their home'
         return response
 
     search = StructuredTool.from_function(
@@ -70,5 +65,5 @@ if __name__ == '__main__':
     #q1 = agent_executor.invoke({"input": "Tell me what you know about patient 12345"})
     #print(q1)
 
-    q2 = agent_executor.invoke({"input": "Has patient 12345 encountered any supernatural beings, provide only the answer to the question?"})
+    q2 = agent_executor.invoke({"input": "Has patient 12345 experenced any supernation events, if so where?.  Provide only the answer to the question?"})
     print(q2)
