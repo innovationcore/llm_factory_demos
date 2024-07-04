@@ -4,7 +4,7 @@ import openai
 
 client = openai.OpenAI(
     api_key="EMPTY",
-    base_url="http://10.33.31.21:8080/v1",
+    base_url="http://10.33.31.21:8000/v1",
 )
 
 tools = [
@@ -37,7 +37,7 @@ messages = [
     {"role": "user", "content": "What is the current temperature of New York, San Francisco and Chicago?"}
 ]
 response = client.chat.completions.create(
-    model="",
+    model="/models/functionary-small-v2.5",
     messages=messages,
     tools=tools,
     tool_choice="auto",
