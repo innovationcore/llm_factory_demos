@@ -42,7 +42,5 @@ response = client.chat.completions.create(
     tools=tools,
     tool_choice="auto",
 )
-#print(response)
-#print(response.choices[0])
-#print(json.dumps(response.choices[0].message.model_dump()['tool_calls'], indent=2))
-print(json.dumps(response.choices[0].message.model_dump(), indent=2))
+
+print(json.dumps(response.choices[0].message.model_dump()['tool_calls'], indent=2))

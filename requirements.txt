@@ -1,7 +1,7 @@
 langchain
 langchain_community
 langchain_openai
-langchain-caai
+langchain-caai<=0.5
 langchainhub
 requests
 openapi-pydantic

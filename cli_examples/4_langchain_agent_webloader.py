@@ -22,7 +22,7 @@ llm_api_base_local = config['llm_api_base_local']
 llm = ChatOpenAI(
     model_name="/models/functionary-small-v2.5",
     openai_api_key=llm_api_key,
-    openai_api_base=llm_api_base,
+    openai_api_base=llm_api_base_local,
     verbose=True,
     streaming=False
 )
@@ -32,7 +32,6 @@ embeddings = caai_emb_client(
     api_key=llm_api_key,
     api_url=llm_api_base,
 )
-
 
 def get_tools(url):
 
