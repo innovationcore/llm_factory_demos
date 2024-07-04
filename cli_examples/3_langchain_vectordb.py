@@ -1,8 +1,7 @@
 #See https://python.langchain.com/v0.1/docs/modules/data_connection/vectorstores/
 
 import json
-
-from LoraXAPIEmbeddings import LoraXAPIEmbeddings
+from langchain_caai.caai_emb_client import caai_emb_client
 from langchain_community.document_loaders import TextLoader
 from langchain_text_splitters import CharacterTextSplitter
 from langchain_community.vectorstores import FAISS
@@ -15,7 +14,7 @@ llm_api_base = config['llm_api_base']
 llm_api_base_local = config['llm_api_base_local']
 
 
-embeddings = LoraXAPIEmbeddings(
+embeddings = caai_emb_client(
     model="",
     api_key=llm_api_key,
     api_url=llm_api_base,

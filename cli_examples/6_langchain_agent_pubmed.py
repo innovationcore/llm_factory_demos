@@ -1,8 +1,7 @@
 #See https://python.langchain.com/v0.1/docs/integrations/retrievers/pubmed/
 
 import json
-
-from LoraXAPIEmbeddings import LoraXAPIEmbeddings
+from langchain_caai.caai_emb_client import caai_emb_client
 from langchain.tools.retriever import create_retriever_tool
 from langchain_openai import ChatOpenAI
 from langchain import hub
@@ -26,7 +25,7 @@ llm = ChatOpenAI(
     streaming=False
 )
 
-embeddings = LoraXAPIEmbeddings(
+embeddings = caai_emb_client(
     model="",
     api_key=llm_api_key,
     api_url=llm_api_base,

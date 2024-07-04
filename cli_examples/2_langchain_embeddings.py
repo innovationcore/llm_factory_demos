@@ -1,8 +1,7 @@
 #See https://python.langchain.com/v0.1/docs/modules/data_connection/text_embedding/
 
 import json
-
-from LoraXAPIEmbeddings import LoraXAPIEmbeddings
+from langchain_caai.caai_emb_client import caai_emb_client
 
 with open('../config.json') as user_file:
     config = json.load(user_file)
@@ -11,7 +10,7 @@ llm_api_key = config['llm_api_key']
 llm_api_base = config['llm_api_base']
 llm_api_base_local = config['llm_api_base_local']
 
-embeddings = LoraXAPIEmbeddings(
+embeddings = caai_emb_client(
     api_key=llm_api_key,
     api_url=llm_api_base,
     max_batch_size=10

@@ -2,7 +2,6 @@
 
 import json
 
-from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores import FAISS
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -11,7 +10,7 @@ from langchain_openai import ChatOpenAI
 from langchain import hub
 from langchain.agents import create_tool_calling_agent
 from langchain.agents import AgentExecutor
-
+from langchain_caai.caai_emb_client import caai_emb_client
 
 with open('../config.json') as user_file:
     config = json.load(user_file)
@@ -28,7 +27,7 @@ llm = ChatOpenAI(
     streaming=False
 )
 
-embeddings = LoraXAPIEmbeddings(
+embeddings = caai_emb_client(
     model="",
     api_key=llm_api_key,
     api_url=llm_api_base,
