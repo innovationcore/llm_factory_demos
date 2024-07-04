@@ -18,9 +18,10 @@ llm_api_base = config['llm_api_base']
 llm_api_base_local = config['llm_api_base_local']
 
 llm = ChatOpenAI(
-    model_name="",
+    model_name="/models/functionary-small-v2.5",
     openai_api_key=llm_api_key,
-    openai_api_base=llm_api_base,
+    #openai_api_base=llm_api_base,
+    openai_api_base="http://10.33.31.21:8000/v1",
     verbose=True,
     streaming=False
 )

@@ -48,10 +48,10 @@ if __name__ == '__main__':
 
     tools = [search]
 
-    llm_api_base_local='http://10.10.10.55:8000/v1'
+    llm_api_base_local='http://10.33.31.21:8000/v1'
 
     llm = ChatOpenAI(
-        model_name="/models/Meta-Llama-3-8B-Instruct",
+        model_name="/models/functionary-small-v2.5",
         openai_api_key=llm_api_key,
         openai_api_base=llm_api_base_local,
         verbose=True,
