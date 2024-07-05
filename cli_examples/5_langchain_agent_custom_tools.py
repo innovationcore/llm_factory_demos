@@ -65,5 +65,15 @@ if __name__ == '__main__':
     #q1 = agent_executor.invoke({"input": "Tell me what you know about patient 12345"})
     #print(q1)
 
-    q2 = agent_executor.invoke({"input": "Has patient 12345 experenced any supernation events, if so where?.  Provide only the answer to the question?"})
+    q2 = agent_executor.invoke({"input": "Is patient 12345 experienced any supernatural events, if so where?.  Provide only the answer to the question?"})
     print(q2)
+
+    '''
+
+{
+'input': 'Has patient 12345 experienced any supernatural events, if so where?.  Provide only the answer to the question?', 
+'output': 'Patient 12345 has experienced a supernatural event where they once encountered Big Foot near their home at 123 Memory Lane, Lexington Kentucky 40504'
+}
+
+    
+    '''
