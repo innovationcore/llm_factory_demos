@@ -26,6 +26,8 @@ embeddings = caai_emb_client(
     model="",
     api_key=llm_api_key,
     api_url=llm_api_base,
+    max_batch_size=100,
+    num_workers=10
 )
 
 specifications = OpenAPISpec.from_file("fhir_baseR4.yaml")

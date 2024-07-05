@@ -54,7 +54,7 @@ if __name__ == '__main__':
     llm = ChatOpenAI(
         model_name="/models/functionary-small-v2.5",
         openai_api_key=llm_api_key,
-        openai_api_base=llm_api_base_local,
+        openai_api_base=llm_api_base,
         verbose=True,
         streaming=False,
     )

@@ -2,9 +2,18 @@ import os
 import json
 import openai
 
+
+with open('../config.json') as user_file:
+    config = json.load(user_file)
+
+llm_api_key = config['llm_api_key']
+llm_api_base = config['llm_api_base']
+llm_api_base_local = config['llm_api_base_local']
+
+
 client = openai.OpenAI(
-    api_key="EMPTY",
-    base_url="http://10.33.31.21:8000/v1",
+    api_key=llm_api_key,
+    base_url=llm_api_base,
 )
 
 tools = [
@@ -43,4 +52,5 @@ response = client.chat.completions.create(
     tool_choice="auto",
 )
 
+print(response.json)
 print(json.dumps(response.choices[0].message.model_dump()['tool_calls'], indent=2))

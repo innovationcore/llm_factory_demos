@@ -15,14 +15,14 @@ llm_api_key = config['llm_api_key']
 llm_api_base = config['llm_api_base']
 llm_api_base_local = config['llm_api_base_local']
 
-sembeddings = caai_emb_client(
+embeddings = caai_emb_client(
     model="",
     api_key=llm_api_key,
     api_url=llm_api_base,
     max_batch_size=100
 )
 
-embeddings = OpenAIEmbeddings(
+openai_client_embeddings = OpenAIEmbeddings(
     openai_api_key=llm_api_key,
     openai_api_base=llm_api_base,
 )
