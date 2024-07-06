@@ -65,7 +65,9 @@ prompt = 'You are a helpful, respectful and honest assistant. Always answer as h
 additional_inputs=[
     gr.Textbox("", label="Optional system prompt", interactive=True),
     gr.Dropdown(
-        choices=[('Llama-3-8B-Instruct-Coder','cc932dfd-b7e4-4638-8d95-3e1000204311'),
+        choices=[
+                 ('Llama-3-8B-Instruct',''),
+                 ('Llama-3-8B-Instruct-Coder','cc932dfd-b7e4-4638-8d95-3e1000204311'),
                  ('Llama-3-8B-Lexi-Uncensored', '434edb13-2067-43ff-9c17-672c7e7129a2'),
                  ('Hermes-2-Theta-Llama-3-8B-32k','ba849661-ece6-4419-b309-0ed2c0db1b8c'),
                  ('L3-8B-Stheno-v3.3-32K','c5dcf4de-2aa8-46c0-b355-90e92334f15c'),
