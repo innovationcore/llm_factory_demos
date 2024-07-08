@@ -3,12 +3,12 @@ import json
 import os
 
 import requests
+from langchain_caai.caai_emb_client import caai_emb_client
 from langchain_community.chains.openapi.chain import OpenAPIEndpointChain
 from langchain_community.tools import APIOperation
 from langchain_community.utilities.openapi import OpenAPISpec
 from langchain_openai import ChatOpenAI
 
-from LoraXAPIEmbeddings import LoraXAPIEmbeddings
 
 with open('../config.json') as user_file:
     config = json.load(user_file)
@@ -25,10 +25,12 @@ llm = ChatOpenAI(
     streaming=False
 )
 
-embeddings = LoraXAPIEmbeddings(
+embeddings = caai_emb_client(
     model="",
     api_key=llm_api_key,
     api_url=llm_api_base,
+    max_batch_size=100,
+    num_workers=10
 )
 
 specifications = OpenAPISpec.from_file("clinical_trial_gov.yaml")
