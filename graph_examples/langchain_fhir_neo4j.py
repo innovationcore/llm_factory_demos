@@ -4,13 +4,14 @@ import glob
 import re
 
 from langchain.chains.retrieval_qa.base import RetrievalQA
+from langchain_caai.caai_emb_client import caai_emb_client
 from langchain_community.vectorstores import Neo4jVector
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 
 import json
 
-from LoraXAPIEmbeddings import LoraXAPIEmbeddings
+
 from NEO4J_Graph import Graph
 from FHIR_to_graph import resource_to_node, resource_to_edges
 
@@ -38,10 +39,11 @@ client = OpenAI(
     )
 
 
-embeddings = LoraXAPIEmbeddings(
+embeddings = caai_emb_client(
     model="",
     api_key=llm_api_key,
     api_url=llm_api_base,
+    max_batch_size=100
 )
 
 def get_database():
