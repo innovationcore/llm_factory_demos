@@ -72,6 +72,7 @@ additional_inputs=[
                  ('Hermes-2-Theta-Llama-3-8B-32k','ba849661-ece6-4419-b309-0ed2c0db1b8c'),
                  ('L3-8B-Stheno-v3.3-32K','c5dcf4de-2aa8-46c0-b355-90e92334f15c'),
                  ('Meta-Llama-3-8B-Instruct-abliterated-v3','ecb33662-7f37-48b7-b273-20d72b2e90b0'),
+                 ('Neo4jCypherQUERY','851b3a9b-21b2-4a59-b3b9-1940c3584023'),
                  ],
         label="adapter",
         interactive=True,
